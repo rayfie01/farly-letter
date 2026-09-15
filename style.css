@@ -105,7 +105,7 @@ html, body {
   border-radius: var(--radius-card);
   box-shadow: var(--card-shadow);
   padding: 40px 54px 44px;
-  overflow: hidden;
+  overflow: visible; /* must be visible so 3D petals can impose over "FA"/"RLY" */
   display: flex;
   flex-direction: column;
 }
@@ -224,7 +224,8 @@ html, body {
   font-size: 0.98rem;
   line-height: 1.55;
   font-weight: 500;
-  color: #24202B;
+  font-style: italic;
+  color: #453A52;
   letter-spacing: 0.01em;
 }
 
@@ -317,6 +318,8 @@ html, body {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
+  will-change: transform;
+  transform-style: preserve-3d;
 }
 
 .canvas-3d-wrapper canvas {

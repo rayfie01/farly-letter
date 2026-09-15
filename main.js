@@ -652,14 +652,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('dialog.custom-modal').forEach((dialog) => {
     dialog.addEventListener('click', (e) => {
-      const rect = dialog.getBoundingClientRect();
-      const isInDialog = (
-        e.clientX >= rect.left &&
-        e.clientX <= rect.right &&
-        e.clientY >= rect.top &&
-        e.clientY <= rect.bottom
-      );
-      if (!isInDialog) {
+      // composedPath()[0] is the exact element clicked.
+      // If it's the <dialog> itself (the backdrop region), close it.
+      if (e.composedPath()[0] === dialog) {
         dialog.close();
       }
     });
@@ -756,7 +751,21 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentX = 0;
     let currentY = 0;
 
+    // Store the button's natural (un-transformed) position once
+    let naturalRect = null;
+
     const runAway = (e) => {
+      // Get natural rect on first use or if we haven't stored it
+      if (!naturalRect) {
+        // Temporarily reset transform to measure natural position
+        needTimeBtn.style.transition = 'none';
+        needTimeBtn.style.transform = 'translate(0px, 0px)';
+        naturalRect = needTimeBtn.getBoundingClientRect();
+        needTimeBtn.style.transition = '';
+        // restore the current position
+        needTimeBtn.style.transform = `translate(${currentX}px, ${currentY}px)`;
+      }
+
       const rect = needTimeBtn.getBoundingClientRect();
       const btnCenterX = rect.left + rect.width / 2;
       const btnCenterY = rect.top + rect.height / 2;
@@ -791,28 +800,20 @@ document.addEventListener('DOMContentLoaded', () => {
       let nextX = currentX + normX * jump + (Math.random() - 0.5) * 40;
       let nextY = currentY + normY * jump + (Math.random() - 0.5) * 35;
 
+      // Clamp using the natural (base) rect vs card boundaries
       const card = document.getElementById('apology-card');
-      if (card) {
+      if (card && naturalRect) {
         const cardRect = card.getBoundingClientRect();
-        const baseLeft = rect.left - currentX;
-        const baseTop = rect.top - currentY;
-        const baseRight = rect.right - currentX;
-        const baseBottom = rect.bottom - currentY;
+        const padding = 16;
 
-        const minX = cardRect.left + 24 - baseLeft;
-        const maxX = cardRect.right - 24 - baseRight;
-        const minY = cardRect.top + 24 - baseTop;
-        const maxY = cardRect.bottom - 24 - baseBottom;
+        // Max translation range from base position
+        const maxLeft  = cardRect.left  + padding - naturalRect.left;
+        const maxRight = cardRect.right  - padding - naturalRect.right;
+        const maxUp    = cardRect.top    + padding - naturalRect.top;
+        const maxDown  = cardRect.bottom - padding - naturalRect.bottom;
 
-        if (nextX < minX || nextX > maxX) {
-          nextX = -nextX * 0.75;
-        }
-        if (nextY < minY || nextY > maxY) {
-          nextY = -nextY * 0.75;
-        }
-
-        nextX = Math.max(minX, Math.min(maxX, nextX));
-        nextY = Math.max(minY, Math.min(maxY, nextY));
+        nextX = Math.max(maxLeft, Math.min(maxRight, nextX));
+        nextY = Math.max(maxUp,   Math.min(maxDown,  nextY));
       }
 
       currentX = nextX;
