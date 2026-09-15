@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To: Farly | With All My Heart</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <!-- Ambient Background Glows -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <!-- Falling Petals Background Canvas -->
+  <canvas id="petals-canvas"></canvas>
+
+  <!-- Main Container Card -->
+  <div class="main-card-wrapper">
+    <div class="glass-card" id="apology-card">
+      
+      <!-- Header Section -->
+      <header class="header">
+        <div class="brand">
+          <span class="brand-title">TO: FARLY</span>
+        </div>
+
+        <nav class="nav-links" id="main-nav">
+          <button class="nav-btn active" data-action="home">HOME</button>
+          <button class="nav-btn" data-action="memories">OUR MEMORIES</button>
+          <button class="nav-btn" data-action="why-sorry">WHY I'M SORRY</button>
+          <button class="nav-btn" data-action="promise">A PROMISE</button>
+          <button class="nav-btn" data-action="for-you">FOR YOU</button>
+        </nav>
+
+        <div class="header-actions">
+          <button class="sound-toggle-btn" id="sound-toggle" title="Toggle sound" aria-label="Toggle Sound">
+            <svg class="sound-icon-on" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
+          </button>
+
+          <button class="menu-dots-btn" id="menu-dots-trigger" aria-label="Open Menu">
+            <span class="dot"></span><span class="dot"></span>
+            <span class="dot"></span><span class="dot"></span>
+            <span class="dot"></span><span class="dot"></span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Centered Top Quote -->
+      <div class="top-quote-section">
+        <p class="quote-text">
+          “I’m truly sorry, Farly. You mean everything to me,<br>and I want to make it right.”
+        </p>
+      </div>
+
+      <!-- Central Hero Section with Split Typography and 3D Canvas -->
+      <main class="hero-section">
+        <div class="split-hero-grid">
+          
+          <!-- Left Big Text "FA" -->
+          <div class="hero-name-col hero-left-name">
+            <h1 class="split-text left-text" aria-label="FA">FA</h1>
+          </div>
+
+          <!-- Center 3D Flower & Vase Canvas Container -->
+          <div class="hero-center-3d">
+            <div class="canvas-3d-wrapper" id="canvas-container">
+              <!-- Three.js Canvas injected here -->
+            </div>
+
+            <!-- Curved 3D Rotation Arrows around Stem (Matching Reference) -->
+            <div class="stem-rotation-indicator" id="rotation-hint" aria-hidden="true">
+              <svg viewBox="0 0 80 50" fill="none" class="rotation-arrows-svg">
+                <!-- Left curved arrow -->
+                <path d="M 20 28 C 12 36, 14 44, 28 46" stroke="#7A5C9E" stroke-width="2" stroke-linecap="round"/>
+                <polyline points="28 41 28 46 22 48" stroke="#7A5C9E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- Right curved arrow -->
+                <path d="M 60 22 C 68 14, 66 6, 52 4" stroke="#7A5C9E" stroke-width="2" stroke-linecap="round"/>
+                <polyline points="52 9 52 4 58 2" stroke="#7A5C9E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Right Big Text "RLY" -->
+          <div class="hero-name-col hero-right-name">
+            <h1 class="split-text right-text" aria-label="RLY">RLY</h1>
+          </div>
+
+          <!-- Lower Left Metadata Block (Directly under "FA") -->
+          <div class="hero-left-sub">
+            <div class="metadata-block">
+              <div class="meta-row">
+                <span class="meta-label">DEDICATED TO:</span>
+                <span class="meta-value">Farly</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-label">MADE WITH:</span>
+                <span class="meta-value">100% Love &amp; Regret</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-label">STATUS:</span>
+                <span class="meta-value">Waiting for your smile</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Center Spacer for Vase Lower Body -->
+          <div class="hero-center-sub"></div>
+
+          <!-- Lower Right Apology Content & Call-to-Action (Directly under "RLY") -->
+          <div class="hero-right-sub">
+            <div class="right-apology-block">
+              <h2 class="apology-title">MY SINCERE APOLOGY</h2>
+              <p class="apology-paragraph">
+                "Dear Farly, I messed up, and I hate that I hurt you. You deserve only kindness and happiness from me. Please forgive me, and let’s move forward together."
+              </p>
+
+              <div class="cta-action-row">
+                <button class="pill-btn primary-pill-btn" id="open-full-note-btn">
+                  READ MY FULL NOTE
+                </button>
+              </div>
+
+              <!-- Interactive Forgiveness Options (Forgive & Runaway Button) -->
+              <div class="forgiveness-inline-box">
+                <button class="action-btn forgive-btn" id="forgive-btn">
+                  <span class="btn-heart">❤️</span>
+                  <span>I Forgive You</span>
+                </button>
+                <button class="action-btn need-time-btn" id="need-time-btn">
+                  <span>Need More Time ⏳</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </main>
+
+      <!-- Soft 2D Corner Daisy Flowers (Matching Reference Image) -->
+      <div class="corner-daisy corner-bottom-left" aria-hidden="true">
+        <svg viewBox="0 0 200 200" fill="none">
+          <g transform="translate(40, 160)">
+            <!-- 18 radiating soft lilac daisy petals -->
+            <g opacity="0.48">
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#C5B0E0" transform="rotate(0)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#D0C0E8" transform="rotate(20)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#BAA3D9" transform="rotate(40)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#C5B0E0" transform="rotate(60)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#D0C0E8" transform="rotate(80)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#BAA3D9" transform="rotate(100)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#C5B0E0" transform="rotate(120)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#D0C0E8" transform="rotate(140)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#BAA3D9" transform="rotate(160)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#C5B0E0" transform="rotate(180)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#D0C0E8" transform="rotate(200)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#BAA3D9" transform="rotate(220)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#C5B0E0" transform="rotate(240)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#D0C0E8" transform="rotate(260)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#BAA3D9" transform="rotate(280)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#C5B0E0" transform="rotate(300)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#D0C0E8" transform="rotate(320)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#BAA3D9" transform="rotate(340)"/>
+            </g>
+            <!-- Center disk -->
+            <circle cx="0" cy="0" r="18" fill="#3B2652" opacity="0.65"/>
+            <circle cx="0" cy="0" r="15" fill="#2A1B3B" opacity="0.75"/>
+            <!-- Stamen dots -->
+            <circle cx="-12" cy="0" r="1.8" fill="#F59E0B" opacity="0.85"/>
+            <circle cx="12" cy="0" r="1.8" fill="#F59E0B" opacity="0.85"/>
+            <circle cx="0" cy="-12" r="1.8" fill="#F59E0B" opacity="0.85"/>
+            <circle cx="0" cy="12" r="1.8" fill="#F59E0B" opacity="0.85"/>
+            <circle cx="-8" cy="-8" r="1.8" fill="#F59E0B" opacity="0.85"/>
+            <circle cx="8" cy="-8" r="1.8" fill="#F59E0B" opacity="0.85"/>
+            <circle cx="-8" cy="8" r="1.8" fill="#F59E0B" opacity="0.85"/>
+            <circle cx="8" cy="8" r="1.8" fill="#F59E0B" opacity="0.85"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="corner-daisy corner-bottom-right" aria-hidden="true">
+        <svg viewBox="0 0 200 200" fill="none">
+          <g transform="translate(160, 160)">
+            <g opacity="0.48">
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#C5B0E0" transform="rotate(0)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#D0C0E8" transform="rotate(20)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#BAA3D9" transform="rotate(40)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#C5B0E0" transform="rotate(60)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#D0C0E8" transform="rotate(80)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#BAA3D9" transform="rotate(100)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#C5B0E0" transform="rotate(120)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#D0C0E8" transform="rotate(140)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#BAA3D9" transform="rotate(160)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#C5B0E0" transform="rotate(180)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#D0C0E8" transform="rotate(200)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#BAA3D9" transform="rotate(220)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#C5B0E0" transform="rotate(240)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#D0C0E8" transform="rotate(260)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#BAA3D9" transform="rotate(280)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#C5B0E0" transform="rotate(300)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#D0C0E8" transform="rotate(320)"/>
+              <path d="M0 0 C-12 -30, -14 -65, 0 -95 C14 -65, 12 -30, 0 0" fill="#BAA3D9" transform="rotate(340)"/>
+            </g>
+            <circle cx="0" cy="0" r="18" fill="#3B2652" opacity="0.65"/>
+            <circle cx="0" cy="0" r="15" fill="#2A1B3B" opacity="0.75"/>
+            <circle cx="-12" cy="0" r="1.8" fill="#F59E0B" opacity="0.85"/>
+            <circle cx="12" cy="0" r="1.8" fill="#F59E0B" opacity="0.85"/>
+            <circle cx="0" cy="-12" r="1.8" fill="#F59E0B" opacity="0.85"/>
+            <circle cx="0" cy="12" r="1.8" fill="#F59E0B" opacity="0.85"/>
+            <circle cx="-8" cy="-8" r="1.8" fill="#F59E0B" opacity="0.85"/>
+            <circle cx="8" cy="-8" r="1.8" fill="#F59E0B" opacity="0.85"/>
+            <circle cx="-8" cy="8" r="1.8" fill="#F59E0B" opacity="0.85"/>
+            <circle cx="8" cy="8" r="1.8" fill="#F59E0B" opacity="0.85"/>
+          </g>
+        </svg>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODALS SECTION -->
+
+  <!-- 1. Full Letter Modal -->
+  <dialog class="custom-modal" id="full-note-modal">
+    <div class="modal-card letter-modal-card">
+      <button class="modal-close-btn" data-close-modal="full-note-modal" aria-label="Close modal">✕</button>
+      
+      <div class="letter-stamp">
+        <span class="stamp-icon">🕊️</span>
+        <span class="stamp-text">FOR FARLY ONLY</span>
+      </div>
+
+      <div class="letter-content">
+        <div class="letter-header">
+          <span class="letter-date">September 15</span>
+          <h2 class="letter-salutation">My Dearest Farly,</h2>
+        </div>
+
+        <div class="letter-body">
+          <p>
+            I’m writing this because words spoken in haste can never undo the sincerity that you deserve. Looking back, I realize how thoughtless I was, and the hardest part is knowing that my actions brought sadness to someone who brings so much light into my life.
+          </p>
+          <p>
+            You have always been someone of genuine warmth, patience, and tenderness. When I let you down, I didn’t just make a simple mistake—I failed to protect the peace and trust you gave me so openly. I don’t want to give excuses, because none could ever justify hurting you.
+          </p>
+          <p>
+            I want you to know how deeply I respect and appreciate you. You deserve someone who listens with full attention, who cherishes your feelings, and who makes you feel safe, heard, and cherished every single day.
+          </p>
+          <p>
+            I am truly, deeply sorry from the bottom of my heart. I am committed to learning, growing, and being the thoughtful, dependable person you can always rely on. Whenever you are ready to talk, I am here.
+          </p>
+        </div>
+
+        <div class="letter-signoff">
+          <p class="signoff-closing">With all my love, regret, and respect,</p>
+          <p class="signoff-name">Always Yours</p>
+        </div>
+      </div>
+
+      <div class="letter-footer">
+        <button class="pill-btn secondary-btn" data-close-modal="full-note-modal">Return to Page</button>
+        <button class="pill-btn primary-pill-btn" id="letter-forgive-trigger">I Forgive You ❤️</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- 2. Forgiveness Celebratory Modal -->
+  <dialog class="custom-modal" id="forgive-modal">
+    <div class="modal-card celebration-modal-card">
+      <button class="modal-close-btn" data-close-modal="forgive-modal" aria-label="Close modal">✕</button>
+      
+      <div class="celebration-badge">
+        <div class="pulse-ring"></div>
+        <span class="celebration-emoji">💐</span>
+      </div>
+
+      <h2 class="celebration-title">Thank You, Farly ❤️</h2>
+      <p class="celebration-subtitle">Your grace means more to me than words can describe.</p>
+      
+      <div class="celebration-box">
+        <p>
+          Thank you for giving me the gift of your forgiveness and a fresh beginning. I promise to treasure your trust with every action, every word, and every quiet moment ahead.
+        </p>
+        <div class="promise-tag">
+          <span>✨</span>
+          <span>A fresh chapter of laughter, care, and listening</span>
+          <span>✨</span>
+        </div>
+      </div>
+
+      <button class="pill-btn primary-pill-btn wide-btn" data-close-modal="forgive-modal">
+        Let’s Smile Together 😊
+      </button>
+    </div>
+  </dialog>
+
+  <!-- 3. Our Memories Modal -->
+  <dialog class="custom-modal" id="memories-modal">
+    <div class="modal-card wide-modal-card">
+      <button class="modal-close-btn" data-close-modal="memories-modal" aria-label="Close modal">✕</button>
+      
+      <div class="modal-header-section">
+        <span class="section-tag">KEEPSAKES</span>
+        <h2 class="modal-heading">Moments I Forever Treasure With You</h2>
+        <p class="modal-subheading">Every memory with you reminds me why you are irreplaceable.</p>
+      </div>
+
+      <div class="polaroid-grid">
+        <div class="polaroid-card tilt-left">
+          <div class="polaroid-photo photo-1">
+            <span class="photo-icon">🌅</span>
+          </div>
+          <div class="polaroid-caption">
+            <h3>When You Smiled</h3>
+            <p>That genuine laughter that made every worry disappear instantly.</p>
+          </div>
+        </div>
+
+        <div class="polaroid-card tilt-straight">
+          <div class="polaroid-photo photo-2">
+            <span class="photo-icon">☕</span>
+          </div>
+          <div class="polaroid-caption">
+            <h3>Late Night Talks</h3>
+            <p>Sharing our dreams, quiet silliness, and feeling completely understood.</p>
+          </div>
+        </div>
+
+        <div class="polaroid-card tilt-right">
+          <div class="polaroid-photo photo-3">
+            <span class="photo-icon">🌸</span>
+          </div>
+          <div class="polaroid-caption">
+            <h3>Your Thoughtfulness</h3>
+            <p>The subtle ways you care for people—a kindness I strive to match.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- 4. Why I'm Sorry Modal -->
+  <dialog class="custom-modal" id="why-sorry-modal">
+    <div class="modal-card standard-modal-card">
+      <button class="modal-close-btn" data-close-modal="why-sorry-modal" aria-label="Close modal">✕</button>
+      
+      <div class="modal-header-section">
+        <span class="section-tag">SELF-REFLECTION</span>
+        <h2 class="modal-heading">Why I’m So Sincere About This</h2>
+        <p class="modal-subheading">Accountability isn't just words; it's understanding where I fell short.</p>
+      </div>
+
+      <div class="reflection-list">
+        <div class="reflection-item">
+          <div class="reflection-num">01</div>
+          <div class="reflection-text">
+            <h3>For Lashing Out On You</h3>
+            <p>There is no excuse for losing my temper or letting frustration cloud my care for you. You deserved my patience, respect, and gentleness—not my harsh words or defensiveness.</p>
+          </div>
+        </div>
+
+        <div class="reflection-item">
+          <div class="reflection-num">02</div>
+          <div class="reflection-text">
+            <h3>For Hurting You When You Put Your Walls Down</h3>
+            <p>You trusted me enough to be vulnerable, open, and authentic with me. Hurting you in moments when you let your guard down breaks my heart the most. I should have protected your softest self, not shaken your trust.</p>
+          </div>
+        </div>
+
+        <div class="reflection-item">
+          <div class="reflection-num">03</div>
+          <div class="reflection-text">
+            <h3>For Making You Regret Everything</h3>
+            <p>The thought that my actions made you second-guess your kindness, your affection, or the beautiful memories we shared kills me inside. You should never have to regret giving someone your pure heart.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- 5. A Promise Modal -->
+  <dialog class="custom-modal" id="promise-modal">
+    <div class="modal-card standard-modal-card">
+      <button class="modal-close-btn" data-close-modal="promise-modal" aria-label="Close modal">✕</button>
+      
+      <div class="modal-header-section">
+        <span class="section-tag">MOVING FORWARD</span>
+        <h2 class="modal-heading">My Four Vows To You</h2>
+        <p class="modal-subheading">Here is how I will show up differently for you starting today:</p>
+      </div>
+
+      <div class="vows-list">
+        <div class="vow-card checked">
+          <div class="vow-check">✓</div>
+          <div class="vow-details">
+            <h4>Deep, Uninterrupted Listening</h4>
+            <p>When you speak, I will listen to understand your heart, not just reply.</p>
+          </div>
+        </div>
+
+        <div class="vow-card checked">
+          <div class="vow-check">✓</div>
+          <div class="vow-details">
+            <h4>Patience in Disagreements</h4>
+            <p>I will always lead with gentleness, never letting ego come before you.</p>
+          </div>
+        </div>
+
+        <div class="vow-card checked">
+          <div class="vow-check">✓</div>
+          <div class="vow-details">
+            <h4>Thoughtful Gestures Every Week</h4>
+            <p>I will remember the little things that make your day brighter and easier.</p>
+          </div>
+        </div>
+
+        <div class="vow-card checked">
+          <div class="vow-check">✓</div>
+          <div class="vow-details">
+            <h4>Total Honesty &amp; Transparency</h4>
+            <p>Zero secrecy, pure openness, and unconditional support whenever you need it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- 6. For You (Little Garden / Secret Notes) Modal -->
+  <dialog class="custom-modal" id="for-you-modal">
+    <div class="modal-card standard-modal-card">
+      <button class="modal-close-btn" data-close-modal="for-you-modal" aria-label="Close modal">✕</button>
+      
+      <div class="modal-header-section">
+        <span class="section-tag">A LITTLE SURPRISE</span>
+        <h2 class="modal-heading">Little Reminders For Farly</h2>
+        <p class="modal-subheading">Tap on any petal card below to reveal a sweet message just for you:</p>
+      </div>
+
+      <div class="petal-cards-grid">
+        <div class="secret-petal-card" data-note="Your smile is the most beautiful thing in the world. Never let anyone dim it.">
+          <span class="card-icon">🌸</span>
+          <span class="card-hint">Tap to open</span>
+        </div>
+
+        <div class="secret-petal-card" data-note="You deserve all the peace, soft blankets, sweet pastries, and laughter in the universe.">
+          <span class="card-icon">🌷</span>
+          <span class="card-hint">Tap to open</span>
+        </div>
+
+        <div class="secret-petal-card" data-note="I admire your intelligence, your grace, and how passionately you care about what you love.">
+          <span class="card-icon">🪻</span>
+          <span class="card-hint">Tap to open</span>
+        </div>
+
+        <div class="secret-petal-card" data-note="Even on cloudy days, you are someone's reason to be thankful. (Especially mine!)">
+          <span class="card-icon">🌼</span>
+          <span class="card-hint">Tap to open</span>
+        </div>
+      </div>
+
+      <div class="revealed-note-display" id="revealed-note-box">
+        <p class="revealed-placeholder">Select a flower card above to read a personal note ✨</p>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Scripts -->
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
