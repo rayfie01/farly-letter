@@ -81,18 +81,8 @@ class BackgroundMusic {
     this.audio.preload = 'none';
     this.enabled = false;
     this.gain = null;
-    this.pauseTimer = null;
-    this.audio.addEventListener('timeupdate', () => {
-      if (this.enabled && this.audio.duration - this.audio.currentTime < 3 && !this.ending) {
-        this.ending = true;
-        this.fade(0, Math.max(.1, this.audio.duration - this.audio.currentTime));
-      }
-    });
     this.audio.addEventListener('ended', () => {
-      if (this.enabled) {
-        this.audio.currentTime = 0;
-        this.setEnabled(true).catch(() => {});
-      }
+      this.enabled = false;
     });
   }
 
@@ -105,10 +95,9 @@ class BackgroundMusic {
 
   async setEnabled(enabled) {
     this.enabled = enabled;
-    clearTimeout(this.pauseTimer);
     if (!enabled) {
-      if (this.gain) this.fade(0, 1.5);
-      this.pauseTimer = setTimeout(() => this.audio.pause(), 1600);
+      this.audio.pause();
+      if (this.gain) this.fade(0, 0);
       return;
     }
     synth.init();
@@ -126,13 +115,11 @@ class BackgroundMusic {
     if (!this.enabled) return;
     await this.audio.play();
     if (!this.enabled) return;
-    this.ending = false;
     this.fade(.22, 3);
   }
 
   dispose() {
     this.enabled = false;
-    clearTimeout(this.pauseTimer);
     this.audio.pause();
     this.audio.removeAttribute('src');
     this.audio.load();

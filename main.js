@@ -110,6 +110,7 @@ document.getElementById('forgive-btn').addEventListener('click',forgive);
 document.getElementById('letter-forgive-trigger').addEventListener('click',forgive);
 const soundButton=document.getElementById('sound-toggle');
 function soundState(){soundButton.setAttribute('aria-pressed',String(synth.enabled));soundButton.setAttribute('aria-label',synth.enabled?'Mute music and sound':'Play music and sound');soundButton.title=synth.enabled?'Mute music and sound':'Play music and sound';soundButton.classList.toggle('is-muted',!synth.enabled);}
+music.audio.addEventListener('ended',()=>{synth.enabled=false;soundState();});
 soundState();soundButton.addEventListener('click',async()=>{
   synth.toggle();soundState();
   try { await music.setEnabled(synth.enabled); }
