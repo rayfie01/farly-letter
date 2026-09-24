@@ -74,3 +74,71 @@ class SoftSoundSynth {
 
 export const synth = new SoftSoundSynth();
 
+// Share the audio context so music also fades reliably on mobile browsers.
+class BackgroundMusic {
+  constructor() {
+    this.audio = new Audio(`${import.meta.env.BASE_URL}from-eden.mp3`);
+    this.audio.preload = 'none';
+    this.enabled = false;
+    this.gain = null;
+    this.pauseTimer = null;
+    this.audio.addEventListener('timeupdate', () => {
+      if (this.enabled && this.audio.duration - this.audio.currentTime < 3 && !this.ending) {
+        this.ending = true;
+        this.fade(0, Math.max(.1, this.audio.duration - this.audio.currentTime));
+      }
+    });
+    this.audio.addEventListener('ended', () => {
+      if (this.enabled) {
+        this.audio.currentTime = 0;
+        this.setEnabled(true).catch(() => {});
+      }
+    });
+  }
+
+  fade(volume, seconds) {
+    const now = synth.ctx.currentTime;
+    const gain = this.gain.gain;
+    gain.cancelAndHoldAtTime(now);
+    gain.linearRampToValueAtTime(volume, now + seconds);
+  }
+
+  async setEnabled(enabled) {
+    this.enabled = enabled;
+    clearTimeout(this.pauseTimer);
+    if (!enabled) {
+      if (this.gain) this.fade(0, 1.5);
+      this.pauseTimer = setTimeout(() => this.audio.pause(), 1600);
+      return;
+    }
+    synth.init();
+    if (!synth.ctx) throw new Error('Audio is unavailable');
+    if (!this.gain) {
+      const source = synth.ctx.createMediaElementSource(this.audio);
+      const filter = synth.ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.value = 6500;
+      this.gain = synth.ctx.createGain();
+      this.gain.gain.value = 0;
+      source.connect(filter).connect(this.gain).connect(synth.ctx.destination);
+    }
+    await synth.ctx.resume();
+    if (!this.enabled) return;
+    await this.audio.play();
+    if (!this.enabled) return;
+    this.ending = false;
+    this.fade(.22, 3);
+  }
+
+  dispose() {
+    this.enabled = false;
+    clearTimeout(this.pauseTimer);
+    this.audio.pause();
+    this.audio.removeAttribute('src');
+    this.audio.load();
+    this.gain?.disconnect();
+  }
+}
+
+export const music = new BackgroundMusic();
+

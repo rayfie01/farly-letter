@@ -15,7 +15,7 @@ html, body { background: #292827; color: var(--text-body); }
 .main-card-wrapper { padding: clamp(18px, 4.5vw, 70px); }
 .glass-card { max-width: 1520px; min-height: min(780px, 88vh); border-radius: 0; border: 1px solid #33302f; box-shadow: 0 25px 90px #0003; padding: 30px clamp(22px, 3.8vw, 64px) 28px; background: #080808; }
 .ambient-glow, .corner-daisy { display: none; }
-#petals-canvas { opacity: .2; }
+#petals-canvas { opacity: .75; z-index: 20; }
 .header { gap: 16px; }
 .brand-title { font-family: Georgia, 'Times New Roman', serif; font-size: 1rem; letter-spacing: .03em; font-weight: 400; }
 .nav-links { margin-left: auto; gap: clamp(10px, 1.6vw, 26px); }
