@@ -109,6 +109,23 @@ function forgive() {
 document.getElementById('forgive-btn').addEventListener('click',forgive);
 document.getElementById('letter-forgive-trigger').addEventListener('click',forgive);
 const soundButton=document.getElementById('sound-toggle');
+const musicInvitation=document.getElementById('flower-music-invitation');
+function updateMusicInvitation(){
+  const playing=!music.audio.paused&&!music.audio.ended;
+  musicInvitation.classList.toggle('is-playing',playing);
+  musicInvitation.querySelector('.flower-invitation-caption').textContent=playing?'a little song, just for you':'a little song for you';
+  musicInvitation.setAttribute('aria-label',playing?'Your song is playing':'Hold the flower — play a little song for you');
+}
+music.audio.addEventListener('playing',updateMusicInvitation);
+music.audio.addEventListener('pause',updateMusicInvitation);
+music.audio.addEventListener('ended',updateMusicInvitation);
+function playFlowerMusic(event){
+  event.stopPropagation();
+  if(!music.audio.paused&&!music.audio.ended)return;
+  synth.enabled=true;soundState();startDefaultMusic();
+}
+container.addEventListener('click',playFlowerMusic);
+musicInvitation.addEventListener('click',playFlowerMusic);
 function soundState(){soundButton.setAttribute('aria-pressed',String(synth.enabled));soundButton.setAttribute('aria-label',synth.enabled?'Mute music and sound':'Play music and sound');soundButton.title=synth.enabled?'Mute music and sound':'Play music and sound';soundButton.classList.toggle('is-muted',!synth.enabled);}
 music.audio.addEventListener('ended',()=>{synth.enabled=false;soundState();});
 synth.enabled=true;

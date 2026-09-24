@@ -52,6 +52,13 @@ html, body { background: #080808; color: var(--text-body); }
 .meta-label { display: block; color: #c0b4b6; font-size: .6rem; letter-spacing: .09em; font-weight: 500; }
 .meta-value { color: #8f8587; font-weight: 400; }
 .flower-controls { gap: 14px; }
+.flower-music-invitation { display: flex; flex-direction: column; align-items: center; gap: 5px; flex-shrink: 0; min-height: 64px; margin: 0 auto 14px; padding: 6px 20px; border: 0; background: transparent; color: #edbed0; cursor: pointer; transition: color .25s, opacity .25s; }
+.flower-invitation-title { font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-weight: 400; font-size: clamp(1.35rem, 2.2vw, 1.85rem); letter-spacing: .025em; }
+.flower-invitation-caption { font-family: var(--font-sans); font-size: .62rem; letter-spacing: .14em; color: #ba9ca8; }
+.flower-music-invitation:hover { color: #ffe4ee; }
+.flower-music-invitation.is-playing { opacity: .55; }
+.flower-music-invitation:focus-visible { outline: 2px solid #e5afc2; outline-offset: 4px; border-radius: 4px; }
+@media (prefers-reduced-motion: reduce) { .flower-music-invitation { transition: none; } }
 .flower-controls button { color: #b9a2ab; border-color: #30262b; border-radius: 2px; font-size: .66rem; background: #0d0b0c; }
 .flower-controls button:hover { color: #f5d7e2; background: #21161c; }
 .flower-fallback { mix-blend-mode: normal; }
