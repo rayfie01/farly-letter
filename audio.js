@@ -78,7 +78,8 @@ export const synth = new SoftSoundSynth();
 class BackgroundMusic {
   constructor() {
     this.audio = new Audio(`${import.meta.env.BASE_URL}from-eden.mp3`);
-    this.audio.preload = 'none';
+    this.audio.preload = 'auto';
+    this.audio.load();
     this.enabled = false;
     this.gain = null;
     this.requestId = 0;
@@ -116,7 +117,7 @@ class BackgroundMusic {
     // Invoke both during the gesture so mobile autoplay permission is retained.
     await Promise.all([synth.ctx.resume(), this.audio.play()]);
     if (!this.enabled || requestId !== this.requestId) return;
-    this.fade(.22, 3);
+    this.fade(.22, .25);
   }
 
   dispose() {
