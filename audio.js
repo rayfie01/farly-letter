@@ -81,6 +81,7 @@ class BackgroundMusic {
     this.audio.preload = 'none';
     this.enabled = false;
     this.gain = null;
+    this.requestId = 0;
     this.audio.addEventListener('ended', () => {
       this.enabled = false;
     });
@@ -94,6 +95,7 @@ class BackgroundMusic {
   }
 
   async setEnabled(enabled) {
+    const requestId = ++this.requestId;
     this.enabled = enabled;
     if (!enabled) {
       this.audio.pause();
@@ -111,10 +113,9 @@ class BackgroundMusic {
       this.gain.gain.value = 0;
       source.connect(filter).connect(this.gain).connect(synth.ctx.destination);
     }
-    await synth.ctx.resume();
-    if (!this.enabled) return;
-    await this.audio.play();
-    if (!this.enabled) return;
+    // Invoke both during the gesture so mobile autoplay permission is retained.
+    await Promise.all([synth.ctx.resume(), this.audio.play()]);
+    if (!this.enabled || requestId !== this.requestId) return;
     this.fade(.22, 3);
   }
 

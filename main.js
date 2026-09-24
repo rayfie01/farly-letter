@@ -111,7 +111,35 @@ document.getElementById('letter-forgive-trigger').addEventListener('click',forgi
 const soundButton=document.getElementById('sound-toggle');
 function soundState(){soundButton.setAttribute('aria-pressed',String(synth.enabled));soundButton.setAttribute('aria-label',synth.enabled?'Mute music and sound':'Play music and sound');soundButton.title=synth.enabled?'Mute music and sound':'Play music and sound';soundButton.classList.toggle('is-muted',!synth.enabled);}
 music.audio.addEventListener('ended',()=>{synth.enabled=false;soundState();});
+synth.enabled=true;
+let awaitingMusicGesture=true;
+let soundRequest=0;
+function clearMusicGesture(){
+  awaitingMusicGesture=false;
+  document.removeEventListener('click',startMusicOnGesture);
+  document.removeEventListener('keydown',startMusicOnGesture);
+}
+async function startDefaultMusic(){
+  const request=++soundRequest;
+  try {
+    await music.setEnabled(true);
+    if(request===soundRequest)clearMusicGesture();
+  } catch(error) {
+    if(request!==soundRequest)return;
+    // Browser autoplay restrictions are expected; retry on a real interaction.
+    if(error.name!=='NotAllowedError')console.warn('Music unavailable:',error);
+  }
+}
+function startMusicOnGesture(event){
+  if(!awaitingMusicGesture||!synth.enabled||event.target.closest?.('#sound-toggle'))return;
+  if(event.type==='keydown'&&(event.repeat||!['Enter',' '].includes(event.key)))return;
+  startDefaultMusic();
+}
+document.addEventListener('click',startMusicOnGesture);
+document.addEventListener('keydown',startMusicOnGesture);
+startDefaultMusic();
 soundState();soundButton.addEventListener('click',async()=>{
+  ++soundRequest;clearMusicGesture();
   synth.toggle();soundState();
   try { await music.setEnabled(synth.enabled); }
   catch(error) {
