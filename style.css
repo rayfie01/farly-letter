@@ -1143,3 +1143,109 @@ html, body {
     width: 100%;
   }
 }
+
+/* Responsive composition: one name, one flower, a clear reading order. */
+html, body { overflow-x: clip; }
+.main-card-wrapper { padding: clamp(16px, 4vw, 48px); }
+.glass-card { max-width: 1160px; padding: clamp(24px, 4vw, 52px); }
+.header { gap: 24px; }
+.brand-title { white-space: nowrap; font-size: 1.1rem; }
+.nav-links { gap: clamp(8px, 1.3vw, 20px); }
+.nav-btn { min-height: 44px; font-size: .75rem; }
+.header-actions { gap: 4px; }
+.sound-toggle-btn, .menu-dots-btn { min-width: 44px; min-height: 44px; position: relative; }
+.menu-dots-btn { display: none; align-content: center; justify-content: center; }
+.sound-toggle-btn.is-muted::after { content: ''; position: absolute; width: 21px; height: 2px; background: currentColor; transform: rotate(-45deg); }
+.top-quote-section { margin: 24px auto 12px; padding: 0; }
+.quote-text { font-size: 1rem; line-height: 1.65; }
+.hero-section { margin: 0; }
+.split-hero-grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); grid-template-rows: auto auto auto; column-gap: 28px; min-height: 0; align-items: start; }
+.hero-left-name { grid-column: 1; grid-row: 1; justify-content: flex-start; padding: 42px 0 20px; z-index: 2; }
+.split-text { font-size: clamp(5rem, 10vw, 8.5rem); line-height: .98; letter-spacing: -.065em; font-weight: 800; }
+.hero-center-3d { grid-column: 2; grid-row: 1 / span 3; width: 100%; height: clamp(420px, 48vw, 560px); margin: 0; flex-direction: column; z-index: 1; min-width: 0; }
+.canvas-3d-wrapper { min-height: 0; flex: 1; width: 100%; touch-action: pan-y; will-change: auto; transform-style: flat; }
+.hero-right-sub { grid-column: 1; grid-row: 2; padding: 0; align-items: flex-start; text-align: left; }
+.right-apology-block { max-width: 440px; align-items: flex-start; text-align: left; }
+.apology-title { font-size: .85rem; letter-spacing: .13em; margin-bottom: 12px; }
+.apology-paragraph { font-size: 1rem; line-height: 1.75; margin-bottom: 24px; }
+.hero-left-sub { grid-column: 1; grid-row: 3; padding: 26px 0 8px; align-items: flex-start; text-align: left; }
+.metadata-block { align-items: flex-start; gap: 5px; }
+.meta-row { font-size: .75rem; flex-wrap: wrap; }
+.pill-btn, .action-btn { min-height: 44px; font-size: .8125rem; }
+.primary-pill-btn { background: #765294; }
+.forgive-btn { background: #765294; }
+.forgiveness-inline-box { flex-wrap: wrap; gap: 8px; width: 100%; }
+.need-time-btn { will-change: auto; transform: none; }
+.flower-controls { display: flex; justify-content: center; align-items: center; gap: 8px; flex-shrink: 0; }
+.flower-controls button { border: 1px solid #cfc0db; background: transparent; color: #5b416e; min-width: 44px; min-height: 44px; border-radius: 24px; padding: 8px 12px; font: 500 .75rem var(--font-sans); cursor: pointer; }
+.flower-controls button:first-child, .flower-controls button:last-child { font-size: 1.25rem; }
+.flower-controls button:hover { background: #ede4f7; }
+button:disabled { opacity: .4; cursor: default; }
+.flower-fallback { display: block; width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+.corner-daisy { width: 150px; height: 150px; opacity: .5; }
+.corner-bottom-left { left: -25px; bottom: -25px; }
+.corner-bottom-right { right: -25px; bottom: -25px; }
+button:focus-visible, a:focus-visible { outline: 3px solid #693791; outline-offset: 4px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.modal-open { overflow: hidden; }
+.custom-modal { width: max-content; max-width: calc(100% - 32px); max-height: calc(100dvh - 32px); overflow: visible; border-radius: 24px; }
+.modal-card { width: min(580px, calc(100vw - 32px)); max-width: 100%; max-height: calc(100dvh - 32px); overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; padding: 40px 32px; scrollbar-width: thin; }
+.wide-modal-card { width: min(760px, calc(100vw - 32px)); }
+.celebration-modal-card { width: min(480px, calc(100vw - 32px)); }
+.modal-close-btn { width: 44px; height: 44px; top: 10px; right: 10px; }
+.modal-header-section, .letter-stamp { margin-right: 24px; }
+.modal-heading { font-size: clamp(1.35rem, 4vw, 1.65rem); padding-right: 12px; }
+.modal-subheading, .polaroid-caption p, .reflection-text p, .vow-details p, .celebration-subtitle, .celebration-box { font-size: .9375rem; line-height: 1.65; }
+.letter-body { font-size: 1rem; }
+.letter-footer { flex-wrap: wrap; }
+.vow-card { cursor: default; }
+.vow-card:hover { transform: none; background: white; border-color: rgba(138,104,172,.16); }
+.secret-petal-card { font-family: inherit; min-width: 0; }
+.card-hint { font-size: .75rem; }
+.time-message { font-size: 1rem; line-height: 1.7; margin: 20px 0 28px; }
+.motion-paused *, .motion-paused *::before, .motion-paused *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+@media (max-width: 980px) {
+  .menu-dots-btn { display: grid; }
+  .header { z-index: 40; }
+  .nav-links { display: none; position: absolute; right: 0; top: calc(100% + 8px); flex-direction: column; align-items: stretch; gap: 0; min-width: 210px; padding: 8px; border: 1px solid #d9c9e4; border-radius: 16px; background: #faf7fd; box-shadow: 0 16px 40px #46305226; }
+  .nav-links.is-open { display: flex; }
+  .nav-btn { text-align: left; padding: 10px 16px; }
+  .split-hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, .9fr); grid-template-rows: auto auto auto; text-align: left; gap: 0 16px; justify-items: stretch; }
+  .hero-left-name { padding-top: 30px; }
+  .split-text { font-size: clamp(4rem, 10vw, 7rem); }
+  .hero-center-3d { height: 470px; }
+  .polaroid-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+}
+@media (max-width: 680px) {
+  .main-card-wrapper { padding: 16px; }
+  .glass-card { padding: 20px; border-radius: 26px; }
+  .header { gap: 8px; }
+  .brand-title { font-size: .9375rem; }
+  .top-quote-section { margin: 20px 0; }
+  .quote-text { font-size: .9375rem; }
+  .quote-text br { display: none; }
+  .split-hero-grid { grid-template-columns: minmax(0,1fr); grid-template-rows: auto auto auto auto; gap: 0; text-align: center; }
+  .hero-left-name { grid-column: 1; grid-row: 1; justify-content: center; padding: 4px 0 20px; }
+  .split-text { font-size: clamp(4.5rem, 20vw, 7rem); }
+  .hero-right-sub { grid-column: 1; grid-row: 2; align-items: center; }
+  .right-apology-block { align-items: center; text-align: center; }
+  .apology-paragraph { line-height: 1.65; margin-bottom: 18px; }
+  .hero-center-3d { grid-column: 1; grid-row: 3; width: 100%; height: clamp(350px, 105vw, 440px); margin: 18px 0 0; }
+  .hero-left-sub { grid-column: 1; grid-row: 4; align-items: center; padding: 24px 0 4px; }
+  .metadata-block { align-items: center; }
+  .meta-row { justify-content: center; }
+  .forgiveness-inline-box { flex-direction: row; justify-content: center; }
+  .action-btn { width: auto; flex: 1 1 130px; padding: 9px 12px; }
+  .modal-card { padding: 50px 20px 24px; }
+  .modal-header-section, .letter-stamp { margin-right: 0; }
+  .polaroid-grid { grid-template-columns: minmax(0,1fr); gap: 24px; }
+  .polaroid-photo { height: 150px; }
+  .reflection-item { padding: 16px 12px; gap: 10px; }
+  .reflection-text { min-width: 0; }
+  .letter-footer { flex-direction: column; align-items: stretch; }
+  .petal-cards-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .corner-daisy { width: 95px; height: 95px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

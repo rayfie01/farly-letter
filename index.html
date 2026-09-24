@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./nocturne.css" />
 </head>
 <body>
   <!-- Ambient Background Glows -->
@@ -15,19 +16,19 @@
   <div class="ambient-glow glow-2"></div>
 
   <!-- Falling Petals Background Canvas -->
-  <canvas id="petals-canvas"></canvas>
+  <canvas id="petals-canvas" aria-hidden="true"></canvas>
 
   <!-- Main Container Card -->
   <div class="main-card-wrapper">
     <div class="glass-card" id="apology-card">
-      
+
       <!-- Header Section -->
       <header class="header">
         <div class="brand">
           <span class="brand-title">TO: FARLY</span>
         </div>
 
-        <nav class="nav-links" id="main-nav">
+        <nav class="nav-links" id="main-nav" aria-label="Main navigation">
           <button class="nav-btn active" data-action="home">HOME</button>
           <button class="nav-btn" data-action="memories">OUR MEMORIES</button>
           <button class="nav-btn" data-action="why-sorry">WHY I'M SORRY</button>
@@ -43,7 +44,7 @@
             </svg>
           </button>
 
-          <button class="menu-dots-btn" id="menu-dots-trigger" aria-label="Open Menu">
+          <button class="menu-dots-btn" id="menu-dots-trigger" aria-label="Open Menu" aria-expanded="false" aria-controls="main-nav">
             <span class="dot"></span><span class="dot"></span>
             <span class="dot"></span><span class="dot"></span>
             <span class="dot"></span><span class="dot"></span>
@@ -54,44 +55,63 @@
       <!-- Centered Top Quote -->
       <div class="top-quote-section">
         <p class="quote-text">
-          “I’m truly sorry, Farly. You mean everything to me,<br>and I want to make it right.”
+          “I’m truly sorry, Farly. You mean everything to me, <br>and I want to make it right.”
         </p>
       </div>
 
-      <!-- Central Hero Section with Split Typography and 3D Canvas -->
+      <!-- Main message and interactive flower -->
       <main class="hero-section">
         <div class="split-hero-grid">
-          
-          <!-- Left Big Text "FA" -->
+
+          <!-- Complete name -->
           <div class="hero-name-col hero-left-name">
-            <h1 class="split-text left-text" aria-label="FA">FA</h1>
+            <h1 class="split-text left-text" id="farly-heading">Farly</h1>
           </div>
 
-          <!-- Center 3D Flower & Vase Canvas Container -->
+
+
+
+
+
+
+          <!-- Apology and response actions -->
+          <div class="hero-right-sub">
+            <div class="right-apology-block">
+              <h2 class="apology-title">MY SINCERE APOLOGY</h2>
+              <p class="apology-paragraph">
+                "Dear Farly, I messed up, and I hate that I hurt you. You deserve only kindness and happiness from me. Please forgive me, and let’s move forward together."
+              </p>
+
+              <div class="cta-action-row">
+                <button class="pill-btn primary-pill-btn" id="open-full-note-btn">
+                  READ MY FULL NOTE
+                </button>
+              </div>
+
+              <!-- Response choices -->
+              <div class="forgiveness-inline-box">
+                <button class="action-btn forgive-btn" id="forgive-btn">
+                  <span class="btn-heart">❤️</span>
+                  <span>I Forgive You</span>
+                </button>
+                <button class="action-btn need-time-btn" id="need-time-btn">
+                  <span>Need More Time ⏳</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+<!-- Center 3D Flower & Vase Canvas Container -->
           <div class="hero-center-3d">
-            <div class="canvas-3d-wrapper" id="canvas-container">
+            <div class="canvas-3d-wrapper" id="canvas-container" role="img" aria-label="A lilac flower with dew drops in a glass vase">
               <!-- Three.js Canvas injected here -->
             </div>
 
-            <!-- Curved 3D Rotation Arrows around Stem (Matching Reference) -->
-            <div class="stem-rotation-indicator" id="rotation-hint" aria-hidden="true">
-              <svg viewBox="0 0 80 50" fill="none" class="rotation-arrows-svg">
-                <!-- Left curved arrow -->
-                <path d="M 20 28 C 12 36, 14 44, 28 46" stroke="#7A5C9E" stroke-width="2" stroke-linecap="round"/>
-                <polyline points="28 41 28 46 22 48" stroke="#7A5C9E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <!-- Right curved arrow -->
-                <path d="M 60 22 C 68 14, 66 6, 52 4" stroke="#7A5C9E" stroke-width="2" stroke-linecap="round"/>
-                <polyline points="52 9 52 4 58 2" stroke="#7A5C9E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
+            <!-- Accessible flower controls -->
+            <div class="flower-controls"><button type="button" id="rotate-left" aria-label="Rotate flower left">↶</button><button type="button" id="motion-toggle" aria-pressed="false">Pause motion</button><button type="button" id="rotate-right" aria-label="Rotate flower right">↷</button></div>
           </div>
 
-          <!-- Right Big Text "RLY" -->
-          <div class="hero-name-col hero-right-name">
-            <h1 class="split-text right-text" aria-label="RLY">RLY</h1>
-          </div>
-
-          <!-- Lower Left Metadata Block (Directly under "FA") -->
+          <!-- Dedication -->
           <div class="hero-left-sub">
             <div class="metadata-block">
               <div class="meta-row">
@@ -108,37 +128,6 @@
               </div>
             </div>
           </div>
-
-          <!-- Center Spacer for Vase Lower Body -->
-          <div class="hero-center-sub"></div>
-
-          <!-- Lower Right Apology Content & Call-to-Action (Directly under "RLY") -->
-          <div class="hero-right-sub">
-            <div class="right-apology-block">
-              <h2 class="apology-title">MY SINCERE APOLOGY</h2>
-              <p class="apology-paragraph">
-                "Dear Farly, I messed up, and I hate that I hurt you. You deserve only kindness and happiness from me. Please forgive me, and let’s move forward together."
-              </p>
-
-              <div class="cta-action-row">
-                <button class="pill-btn primary-pill-btn" id="open-full-note-btn">
-                  READ MY FULL NOTE
-                </button>
-              </div>
-
-              <!-- Interactive Forgiveness Options (Forgive & Runaway Button) -->
-              <div class="forgiveness-inline-box">
-                <button class="action-btn forgive-btn" id="forgive-btn">
-                  <span class="btn-heart">❤️</span>
-                  <span>I Forgive You</span>
-                </button>
-                <button class="action-btn need-time-btn" id="need-time-btn">
-                  <span>Need More Time ⏳</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
         </div>
       </main>
 
@@ -223,13 +212,14 @@
     </div>
   </div>
 
+  <p id="response-status" class="sr-only" role="status"></p>
   <!-- MODALS SECTION -->
 
   <!-- 1. Full Letter Modal -->
-  <dialog class="custom-modal" id="full-note-modal">
+  <dialog class="custom-modal" id="full-note-modal" aria-labelledby="full-note-modal-title">
     <div class="modal-card letter-modal-card">
       <button class="modal-close-btn" data-close-modal="full-note-modal" aria-label="Close modal">✕</button>
-      
+
       <div class="letter-stamp">
         <span class="stamp-icon">🕊️</span>
         <span class="stamp-text">FOR FARLY ONLY</span>
@@ -238,7 +228,7 @@
       <div class="letter-content">
         <div class="letter-header">
           <span class="letter-date">September 15</span>
-          <h2 class="letter-salutation">My Dearest Farly,</h2>
+          <h2 id="full-note-modal-title" class="letter-salutation">My Dearest Farly,</h2>
         </div>
 
         <div class="letter-body">
@@ -270,18 +260,18 @@
   </dialog>
 
   <!-- 2. Forgiveness Celebratory Modal -->
-  <dialog class="custom-modal" id="forgive-modal">
+  <dialog class="custom-modal" id="forgive-modal" aria-labelledby="forgive-modal-title">
     <div class="modal-card celebration-modal-card">
       <button class="modal-close-btn" data-close-modal="forgive-modal" aria-label="Close modal">✕</button>
-      
+
       <div class="celebration-badge">
         <div class="pulse-ring"></div>
         <span class="celebration-emoji">💐</span>
       </div>
 
-      <h2 class="celebration-title">Thank You, Farly ❤️</h2>
+      <h2 id="forgive-modal-title" class="celebration-title">Thank You, Farly ❤️</h2>
       <p class="celebration-subtitle">Your grace means more to me than words can describe.</p>
-      
+
       <div class="celebration-box">
         <p>
           Thank you for giving me the gift of your forgiveness and a fresh beginning. I promise to treasure your trust with every action, every word, and every quiet moment ahead.
@@ -300,13 +290,13 @@
   </dialog>
 
   <!-- 3. Our Memories Modal -->
-  <dialog class="custom-modal" id="memories-modal">
+  <dialog class="custom-modal" id="memories-modal" aria-labelledby="memories-modal-title">
     <div class="modal-card wide-modal-card">
       <button class="modal-close-btn" data-close-modal="memories-modal" aria-label="Close modal">✕</button>
-      
+
       <div class="modal-header-section">
         <span class="section-tag">KEEPSAKES</span>
-        <h2 class="modal-heading">Moments I Forever Treasure With You</h2>
+        <h2 id="memories-modal-title" class="modal-heading">Moments I Forever Treasure With You</h2>
         <p class="modal-subheading">Every memory with you reminds me why you are irreplaceable.</p>
       </div>
 
@@ -345,13 +335,13 @@
   </dialog>
 
   <!-- 4. Why I'm Sorry Modal -->
-  <dialog class="custom-modal" id="why-sorry-modal">
+  <dialog class="custom-modal" id="why-sorry-modal" aria-labelledby="why-sorry-modal-title">
     <div class="modal-card standard-modal-card">
       <button class="modal-close-btn" data-close-modal="why-sorry-modal" aria-label="Close modal">✕</button>
-      
+
       <div class="modal-header-section">
         <span class="section-tag">SELF-REFLECTION</span>
-        <h2 class="modal-heading">Why I’m So Sincere About This</h2>
+        <h2 id="why-sorry-modal-title" class="modal-heading">Why I’m So Sincere About This</h2>
         <p class="modal-subheading">Accountability isn't just words; it's understanding where I fell short.</p>
       </div>
 
@@ -384,13 +374,13 @@
   </dialog>
 
   <!-- 5. A Promise Modal -->
-  <dialog class="custom-modal" id="promise-modal">
+  <dialog class="custom-modal" id="promise-modal" aria-labelledby="promise-modal-title">
     <div class="modal-card standard-modal-card">
       <button class="modal-close-btn" data-close-modal="promise-modal" aria-label="Close modal">✕</button>
-      
+
       <div class="modal-header-section">
         <span class="section-tag">MOVING FORWARD</span>
-        <h2 class="modal-heading">My Four Vows To You</h2>
+        <h2 id="promise-modal-title" class="modal-heading">My Four Vows To You</h2>
         <p class="modal-subheading">Here is how I will show up differently for you starting today:</p>
       </div>
 
@@ -431,45 +421,45 @@
   </dialog>
 
   <!-- 6. For You (Little Garden / Secret Notes) Modal -->
-  <dialog class="custom-modal" id="for-you-modal">
+  <dialog class="custom-modal" id="for-you-modal" aria-labelledby="for-you-modal-title">
     <div class="modal-card standard-modal-card">
       <button class="modal-close-btn" data-close-modal="for-you-modal" aria-label="Close modal">✕</button>
-      
+
       <div class="modal-header-section">
         <span class="section-tag">A LITTLE SURPRISE</span>
-        <h2 class="modal-heading">Little Reminders For Farly</h2>
+        <h2 id="for-you-modal-title" class="modal-heading">Little Reminders For Farly</h2>
         <p class="modal-subheading">Tap on any petal card below to reveal a sweet message just for you:</p>
       </div>
 
       <div class="petal-cards-grid">
-        <div class="secret-petal-card" data-note="Your smile is the most beautiful thing in the world. Never let anyone dim it.">
+        <button type="button" class="secret-petal-card" aria-pressed="false" data-note="Your smile is the most beautiful thing in the world. Never let anyone dim it.">
           <span class="card-icon">🌸</span>
           <span class="card-hint">Tap to open</span>
-        </div>
+        </button>
 
-        <div class="secret-petal-card" data-note="You deserve all the peace, soft blankets, sweet pastries, and laughter in the universe.">
+        <button type="button" class="secret-petal-card" aria-pressed="false" data-note="You deserve all the peace, soft blankets, sweet pastries, and laughter in the universe.">
           <span class="card-icon">🌷</span>
           <span class="card-hint">Tap to open</span>
-        </div>
+        </button>
 
-        <div class="secret-petal-card" data-note="I admire your intelligence, your grace, and how passionately you care about what you love.">
+        <button type="button" class="secret-petal-card" aria-pressed="false" data-note="I admire your intelligence, your grace, and how passionately you care about what you love.">
           <span class="card-icon">🪻</span>
           <span class="card-hint">Tap to open</span>
-        </div>
+        </button>
 
-        <div class="secret-petal-card" data-note="Even on cloudy days, you are someone's reason to be thankful. (Especially mine!)">
+        <button type="button" class="secret-petal-card" aria-pressed="false" data-note="Even on cloudy days, you are someone's reason to be thankful. (Especially mine!)">
           <span class="card-icon">🌼</span>
           <span class="card-hint">Tap to open</span>
-        </div>
+        </button>
       </div>
 
-      <div class="revealed-note-display" id="revealed-note-box">
+      <div class="revealed-note-display" id="revealed-note-box" aria-live="polite" aria-atomic="true">
         <p class="revealed-placeholder">Select a flower card above to read a personal note ✨</p>
       </div>
     </div>
   </dialog>
 
-  <!-- Scripts -->
+<!-- Scripts -->
   <script type="module" src="./main.js"></script>
 </body>
 </html>
